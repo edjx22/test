@@ -16,11 +16,9 @@ jobs:
       - name: Pull latest changes
         run: git pull origin main  # Pull latest changes from remote before pushing
 
-      - name: Force push to hub
+      - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.token }}
-        run: git push --force https://j565xu:$HF_TOKEN@huggingface.co/spaces/j565xu/test main
+        run: git push https://j565xu:$HF_TOKEN@huggingface.co/spaces/j565xu/test main
 
-      - name: Check status after pull
-        run: git status
 
