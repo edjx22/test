@@ -10,16 +10,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # Ensures full history is fetched
           lfs: true
 
-      - name: Pull changes from Hugging Face
-        run: git pull https://huggingface.co/spaces/j565xu/test main
+      - name: Pull latest changes
+        run: git pull origin main  # Pull latest changes from remote before pushing
 
-      - name: Resolve conflicts automatically (if safe)
-        run: git merge --strategy-option theirs || true  # Keeps Hugging Face changes if possible
-
-      - name: Push merged changes to Hugging Face
+      - name: Force push to hub
         env:
           HF_TOKEN: ${{ secrets.token }}
-        run: git push https://j565xu:$HF_TOKEN@huggingface.co/spaces/j565xu/test main
+        run: git push --force https://j565xu:$HF_TOKEN@huggingface.co/spaces/j565xu/test main
+
+      - name: Check status after pull
+        run: git status
+
