@@ -14,7 +14,7 @@ jobs:
           lfs: true
 
       - name: Pull latest changes
-        run: git pull origin main  # Pull latest changes from remote before pushing
+        run: git pull  # Pull latest changes from remote before pushing
 
       - name: Push to hub
         env:
